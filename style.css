@@ -1,17 +1,23 @@
-body {
+* {
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #4facfe, #00f2fe);
-    display: flex;
-    justify-content: center;
-    padding: 30px;
 }
 
-form {
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
     background: white;
-    padding: 25px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 15px;
     width: 350px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -22,40 +28,50 @@ h1 {
 input, select, textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #764ba2;
+    outline: none;
 }
 
 textarea {
-    resize: none;
     height: 80px;
+    resize: none;
 }
 
-label {
-    font-weight: bold;
+.check {
+    font-size: 14px;
+}
+
+.check input {
+    width: auto;
+    margin-right: 5px;
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background-color: #4facfe;
     border: none;
+    border-radius: 8px;
+    background: #764ba2;
     color: white;
     font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 button:hover {
-    background-color: #0077ff;
+    background: #5a3d8a;
 }
 
 #resultado {
-    margin-top: 20px;
-    font-weight: bold;
-    color: green;
-    white-space: pre-line;
+    margin-top: 15px;
+    padding: 10px;
+    background: #eafaf1;
+    border-left: 4px solid green;
+    display: none;
 }

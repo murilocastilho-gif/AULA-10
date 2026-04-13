@@ -1,7 +1,6 @@
 const form = document.getElementById("form");
 
-// CPF já cadastrados (simulação)
-const cpfsExistentes = ["12345678900", "11111111111"];
+const cpfs = ["12345678900", "99999999999"];
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
@@ -19,55 +18,41 @@ form.addEventListener("submit", function(e) {
     let motivo = document.getElementById("motivo").value.toLowerCase();
     let termo = document.getElementById("termo").checked;
 
-    // ===== VALIDAÇÕES =====
-
+    // VALIDAÇÕES
     if (nome.length < 3) return alert("Nome inválido");
     if (!email.includes("@")) return alert("Email inválido");
     if (telefone.length < 8 || isNaN(telefone)) return alert("Telefone inválido");
     if (!cpf) return alert("CPF obrigatório");
-    if (cpfsExistentes.includes(cpf)) return alert("CPF já cadastrado");
-    if (idade < 18) return alert("Você precisa ter 18 anos ou mais");
+    if (cpfs.includes(cpf)) return alert("CPF já cadastrado");
+    if (idade < 18) return alert("Precisa ter 18+");
     if (!cidade) return alert("Cidade obrigatória");
-    if (!moradia) return alert("Selecione a moradia");
-    if (!quintal) return alert("Informe sobre quintal");
-    if (!pet) return alert("Informe se já teve pet");
+    if (!moradia) return alert("Selecione moradia");
+    if (!quintal) return alert("Informe quintal");
+    if (!pet) return alert("Informe sobre pet");
     if (isNaN(horas)) return alert("Horas inválidas");
     if (motivo.length < 10) return alert("Motivo muito curto");
     if (!termo) return alert("Aceite o termo");
 
-    // ===== REGRAS DE NEGÓCIO =====
+    // REGRAS
+    if (moradia === "apartamento" && quintal === "sim")
+        return alert("Apartamento não tem quintal");
 
-    if (moradia === "apartamento" && quintal === "sim") {
-        return alert("Apartamento não pode ter quintal");
-    }
+    if (horas > 8)
+        alert("Animal ficará muito tempo sozinho");
 
-    if (moradia === "casa" && quintal === "nao") {
-        alert("Verifique se há espaço adequado para o animal");
-    }
+    if (pet === "nao")
+        alert("ONG poderá acompanhar adaptação");
 
-    if (horas > 8) {
-        alert("Animal ficará muito tempo sozinho!");
-    }
-
-    if (pet === "nao") {
-        alert("A ONG poderá acompanhar sua adaptação");
-    }
-
-    if (motivo === "quero" || motivo === "porque sim") {
+    if (motivo === "quero" || motivo === "porque sim")
         return alert("Motivo inválido");
-    }
 
-    if (motivo.includes("não tenho dinheiro")) {
-        return alert("Condição financeira inadequada");
-    }
-
-    if (motivo.includes("hoje") || motivo.includes("agora")) {
+    if (motivo.includes("hoje"))
         alert("Cuidado com decisão impulsiva");
-    }
 
-    // ===== SUCESSO =====
-    document.getElementById("resultado").innerText =
-        "Cadastro enviado com sucesso!\n" +
-        "Nome: " + nome + "\nCidade: " + cidade;
-
+    const resultado = document.getElementById("resultado");
+    resultado.style.display = "block";
+    resultado.innerText = 
+        "Cadastro enviado!\n\n" +
+        "Nome: " + nome +
+        "\nCidade: " + cidade;
 });
